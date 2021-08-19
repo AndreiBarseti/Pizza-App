@@ -1,0 +1,48 @@
+   <mat-toolbar-row color="primary">
+    <span>
+      Register into the army 
+  </span>
+  </mat-toolbar-row>
+
+
+<div class="example-container">
+
+  <mat-toolbar-row>
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>Username</mat-label>
+      <input matInput type="text" class="example-right-align"
+       placeholder="Enter your username" input id="new-user" #userName />
+    </mat-form-field>
+  </mat-toolbar-row>
+    <mat-toolbar-row>
+    <mat-form-field appearance="fill" floatLabel='always'>
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'"
+          placeholder="Enter your password" input password="new-user" #userPass>
+        <button mat-icon-button matSuffix (click)="hide = !hide"
+         [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+      <button class="add-button" (click)="login(userName.value, userPass.value);
+      userName.value=''" >
+       Log in
+     </button>
+    </mat-toolbar-row>
+    </div>
+
+
+
+
+<app-messages></app-messages>
+
+<mat-toolbar-row color="primary">
+  <span> Don't you have an account? Enroll into the army 
+    <nav>
+      <a routerLink="/signUp">Sign up</a>
+    </nav>
+  </span>
+</mat-toolbar-row>
+

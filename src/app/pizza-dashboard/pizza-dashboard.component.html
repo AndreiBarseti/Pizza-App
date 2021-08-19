@@ -1,0 +1,24 @@
+
+<a *ngFor="let pizza of pizzas">
+  <mat-card (click)="goToDescription(pizza.id)" >
+   
+
+    <mat-card-header class="pizza-card-header">
+      
+      <mat-card-title>
+        <h1>{{ pizza.name | uppercase }} </h1>
+      </mat-card-title>
+
+    </mat-card-header>
+    <mat-card-content>
+      <img width="150" src="{{pizza.image_url}}" alt="Photo of pizza">
+      <ul class="pizza-list">
+        <li>{{pizza.description}}</li>
+        <li>{{pizza.topping}}</li>
+        <li>{{pizza.popularity}}</li>
+
+      </ul>
+    </mat-card-content>
+    <div class="pizza-card-bottom">RON: {{pizza.price}}</div>
+  </mat-card>
+</a>

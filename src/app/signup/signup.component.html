@@ -1,0 +1,65 @@
+<div class="example-container">
+
+  <mat-toolbar-row>
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>Username</mat-label>
+      <input matInput type="text" class="example-right-align"
+       placeholder="Enter your username" input id="new-user" #userName />
+    </mat-form-field>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row>
+    <mat-form-field appearance="fill" floatLabel='always'>
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'"
+          placeholder="Enter your password" input password="new-user" #userPass>
+        <button mat-icon-button matSuffix (click)="hide = !hide"
+         [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        
+      </mat-form-field>
+    </mat-toolbar-row>
+
+  <mat-toolbar-row>
+      <mat-form-field appearance="fill" floatLabel='always'>
+        <mat-label>Verify Password</mat-label>
+        <input matInput [type]="hideSecond ? 'password' : 'text'"
+          placeholder="Re-nter your password" input password="new-user" #userPassVerify>
+        <button mat-icon-button matSuffix (click)="hideSecond = !hideSecond"
+         [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideSecond">
+          <mat-icon>{{hideSecond? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        
+      </mat-form-field>
+    </mat-toolbar-row>
+    
+    
+
+    <mat-toolbar-row>
+      <button class="add-button" (click)="add(userName.value, userPass.value, userPassVerify.value);
+  userName.value=''" >
+   Sign up
+ </button>
+ </mat-toolbar-row>
+  </div>
+
+  <mat-toolbar-row color="primary">
+    <span> Do you have already an account? 
+      <nav>
+        <a routerLink="/login">Sign in</a>
+      </nav>
+    </span>
+  </mat-toolbar-row>
+  
+
+
+  <div class="example-container">
+    <mat-form-field appearance="fill">
+      <mat-label>Enter your email</mat-label>
+      <input matInput placeholder="pat@example.com" [formControl]="email" required>
+      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+  </div>
+  
+  
