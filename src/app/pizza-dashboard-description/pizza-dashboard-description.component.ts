@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Pizza } from '../pizza';
 import { PizzaService } from '../pizza.service';
@@ -10,11 +10,12 @@ import { CartService } from '../cart.service';
   selector: 'app-pizza-dashboard',
   templateUrl: './pizza-dashboard-description.component.html',
   providers:[Location],
-  styleUrls: ['./pizza-dashboard-description.component.scss']
+  styleUrls: ['./pizza-dashboard-description.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class PizzaDescriptionComponent implements OnInit {
 
-  @Input() pizza?: Pizza;
+  @Input() pizza: Pizza ;
   public productList : any;
   constructor(
     private router: ActivatedRoute,
@@ -30,8 +31,8 @@ export class PizzaDescriptionComponent implements OnInit {
     
   }
   
-  addtocart( a : any){
-    this.cartService.addToCart(this.pizza);
+  addToCart( pizza: Pizza){
+    this.cartService.addToCart(pizza);
   }
 
   getPizza(): void {

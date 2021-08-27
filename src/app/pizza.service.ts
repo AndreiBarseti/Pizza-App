@@ -22,15 +22,15 @@ import { catchError, map, tap } from 'rxjs/operators';
  
  
  
- /** GET heroes from the server */
+ /** GET pizzas from the server */
  getPizzas(): Observable<Pizza[]> {
   return this.http.get<Pizza[]>(this.pizzasUrl)
     .pipe(
       tap(_ => this.log('fetched pizzas')),
       catchError(this.handleError<Pizza[]>('getPizzas', []))
     );
-    // mai sus cand dadeam return faceam HEROES observable cu of
-  // aici am schimbat cu http.get si ambele functii returneaza un obs of hero array type
+    
+  // aici am schimbat cu http.get si ambele functii returneaza un obs of pizza array type
 
 }
  private handleError<T>(operation = 'operation', result?: T)
@@ -52,15 +52,15 @@ import { catchError, map, tap } from 'rxjs/operators';
  getPizza(id: number): Observable<Pizza> {
     const url = `${this.pizzasUrl}/${id}`;
     return this.http.get<Pizza>(url).pipe(
-    tap(_ => this.log(`fetched pizza name=${id}`)),
+    tap(_ => this.log(`fetched pizza id=${id}`)),
     catchError(this.handleError<Pizza>(`getPizza id=${id}`))
   );
   /*
- getHero() constructs a request URL with the desired hero's id.
+ getPizza() constructs a request URL with the desired pizza's id.
  The server should respond with a single hero rather than an 
-  array of heroes.
- getHero() returns an Observable<Hero> ("an observable of Hero 
-  objects") rather than an observable of hero arrays .
+  array of pizzas.
+ getPizza() returns an Observable<Hero> ("an observable of Pizza 
+  objects") rather than an observable of pizza arrays .
   */
 }
 

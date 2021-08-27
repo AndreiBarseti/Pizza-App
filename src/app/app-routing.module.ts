@@ -5,6 +5,7 @@ import { PizzaDescriptionComponent } from './pizza-dashboard-description/pizza-d
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { CartComponent } from './cart/cart.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo:'/login', pathMatch:'full'},
@@ -13,6 +14,8 @@ const routes: Routes = [
   { path: 'signUp', component: SignupComponent},
   { path: 'login', component: LoginComponent},
   { path: 'cart', component: CartComponent},
+  { path: 'profile', component: ProfileComponent},
+
 ];
 
 @NgModule({

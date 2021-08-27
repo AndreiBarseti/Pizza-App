@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable, of} from 'rxjs';
+import { BehaviorSubject, Observable, of} from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { User } from './user';
-import { USERS } from 'src/mock-users';
+//import { USERS } from 'src/mock-users';
 import { MessageService } from './message.service';
+import { InMemoryDataService } from './in-memory-data.service';
 
 
 @Injectable({
@@ -13,10 +14,15 @@ import { MessageService } from './message.service';
 export class UserService {
   private userUrl = 'api/users';
   public User: User [] = [];
+  public currentUserLogIn = {} as User;
+  public userLogOut = {} as User;
+  public nameLog = new BehaviorSubject<any>({})
+
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService)
+    private messageService: MessageService,
+    private inMemoryDataService: InMemoryDataService,)
      { }
 
 
@@ -41,17 +47,21 @@ export class UserService {
       return of(result as T);
     };
   }
-  /** GET heroes from the server */
-getUsers(): Observable<User[]> {
+  /** GET users from the server */
+ getUsers(): Observable<User[]> {
   return this.http.get<User[]>(this.userUrl)
     .pipe(
       tap(_ => this.log('fetched users')),
       catchError(this.handleError<User[]>('getUsers', []))
     );
-    // mai sus cand dadeam return faceam HEROES observable cu of
-  // aici am schimbat cu http.get si ambele functii returneaza un obs of hero array type
-
+    
 }
+getUser(username: string): Observable<User> {
+  const url = `${this.userUrl}/${username}`;
+  return this.http.get<User>(url).pipe(
+  tap(_ => this.log(`fetched user username=${username}`)),
+  catchError(this.handleError<User>(`getUser username=${username}`))
+); }  
         
   addUser(user: User): Observable<User> {
     /*return this.http.post<User>(this.userUrl, user, this.httpOptions).pipe(
@@ -62,10 +72,38 @@ getUsers(): Observable<User[]> {
   }
 
   loginUser(user: User): Observable<User> {
+
     return this.http.post<User>(this.userUrl, user, this.httpOptions).pipe(
-      tap((newUser: User) => this.log(`loged user w/ name=${newUser.name}`)),
-      catchError(this.handleError<User>('loginUser'))
-    );
+      tap((newUser: User) => {
+
+      this.log(`loged user w/ name=${newUser.username}`);
+      const result = this.inMemoryDataService.User.find(({username}) => 
+      username === newUser.username);
+      if ( result )
+      {this.currentUserLogIn = result;
+      this.nameLog.next(this.currentUserLogIn); }
+      else if(!result) {console.log("nu e userul");return;}
+      console.log(this.currentUserLogIn)}),
+      
+      catchError(this.handleError<User>('loginUser')),
+      
+      
+    )
+    
   }
+  getUserLoged() {
+    return this.nameLog//.asObservable();
+    
+    //oricine foloseste de getUserLoged poate sa dea subscribe 
+    // datelor din productList 
+  }
+  
+  signOut() :void {
+    this.currentUserLogIn = this.userLogOut;
+    this.nameLog.next(this.currentUserLogIn);
+    
+  
+  }
+
   
 }

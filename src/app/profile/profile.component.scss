@@ -1,0 +1,25 @@
+.register-form{
+    max-width: 350px;
+    margin-left: 38%;
+    margin-top: 3%;
+    display: flex;
+
+}
+.float-child{
+    width: 50%;
+    float: left;
+    padding: 20px;
+}
+
+.form-group { 
+    margin-top: -5%; 
+    max-height: 80px;
+}
+.hide{
+    margin-left:100%;
+    
+}
+
+label {
+    font-size: larger;
+}

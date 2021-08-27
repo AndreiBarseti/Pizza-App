@@ -23,6 +23,10 @@ import { MatCardModule} from '@angular/material/card';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { CartComponent } from './cart/cart.component';
 import { HeaderComponent } from './header/header.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatButtonModule } from '@angular/material/button';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -36,6 +40,7 @@ import { HeaderComponent } from './header/header.component';
     LoginComponent,
     CartComponent,
     HeaderComponent,
+    ProfileComponent,
     
   ],
   imports: [
@@ -47,22 +52,23 @@ import { HeaderComponent } from './header/header.component';
     MatNativeDateModule,
     ReactiveFormsModule,
     AppRoutingModule,
-
+    MatSliderModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,  
     MatToolbarModule, 
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService),
-  
+    MatButtonModule,
     MatCardModule,
 
 
     MatButtonToggleModule,
+    NgxPaginationModule,
     
     
   ],
   
-  providers: [],
+  providers: [LoginComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

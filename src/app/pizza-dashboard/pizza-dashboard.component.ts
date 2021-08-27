@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Pizza } from '../pizza';
 import { PizzaService } from '../pizza.service';
 import { Router } from '@angular/router';
@@ -6,12 +6,13 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-first-page',
   templateUrl: './pizza-dashboard.component.html',
-  styleUrls: ['./pizza-dashboard.component.scss']
+  styleUrls: ['./pizza-dashboard.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class PizzaDashboardComponent implements OnInit {
 
   pizzas: Pizza[] = [];
- 
+  p: any;
 
   constructor(private pizzaService: PizzaService,
     private router:Router) { }

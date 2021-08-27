@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Pizza } from './pizza';
 
 
 @Injectable({
@@ -7,7 +8,9 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class CartService {
 
-  public cartItemList: any =[]; 
+  public result : any;
+
+  public cartItemList: Pizza[]=[]; 
   public productList = new BehaviorSubject<any>([]); 
   //se poarta ca un Observable, putem sa-i dam subscribe
   // BehaviourSubject will return the initial value or the current 
@@ -31,37 +34,42 @@ subject.subscribe(x => console.log(x)); ->> aici afisez 1
 
   constructor() { }
   getProducts(){
-    return this.productList.asObservable(); //returnam lista ca Obs
+    return this.productList//.asObservable();
+    //merge si fara asObs ca e BehaviourSubject
+    //returnam lista ca Obs
     //oricine foloseste de getProduct poate sa dea subscribe 
     // datelor din productList 
   }
 
+ 
 
 
-  addToCart(product : any) {
-    if(this.cartItemList.indexOf(product) == -1) 
+  addToCart(product : any ) {
+    
+     const result = this.cartItemList.find(({id}) => id === product.id)
+     //console.log(result)
+    
+    if( !result ) 
     {
+     product.quantity += 1;
      this.cartItemList.push(product);
-     console.log(this.cartItemList);
+     //console.log(this.cartItemList);
      this.productList.next(this.cartItemList); 
      this.getTotalPrice();
-    }
-     else
-     {
-       
-      this.cartItemList.pop(product);
-      product.quantity +=1;
-      this.cartItemList.push(product);
-      this.productList.next(this.cartItemList);
-      this.getTotalPrice;
 
-     }
+    }
+   else {
+
+    result.quantity += 1;
+    this.productList.next(this.cartItemList)
+  
+   }
   }
 
   getTotalPrice() : number{
     let Total = 0;
-    this.cartItemList.map((a : any)=>{
-    Total += a.price;
+    this.cartItemList.map((a : Pizza)=>{
+    Total += a.price * a.quantity;
    } )
    return  Total;
   }

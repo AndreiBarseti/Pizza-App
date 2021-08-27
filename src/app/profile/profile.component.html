@@ -1,16 +1,11 @@
 
-
-  <mat-card  class= "card"> <!-- ca sa imi arate frumos intr-un card-->
-
-    <div class="register-form">
-
-
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
-        <div class="form-group">
+<div class="register-form">
+ <form [formGroup]="form" (ngSubmit)="onSubmit()">
+<div class = "float-child">
+ <div class="form-group">
           <label> Name</label> 
           <!-- class="form-control" ca sa imi arate input sub label-->
-          <input type="text" #userName
+          <input type="text" placeholder="{{showName}}" #userName
           formControlName="name"
           class="form-control"  
           [ngClass]="{'is-invalid': submitted && f.name.errors}"
@@ -21,15 +16,76 @@
           </div>
 
         </div>
+  <div class="form-group">
+    
+    <label>City</label>
+    <input type="text" placeholder="{{showCity}}" #userCity
+    formControlName="name"
+    class="form-control"  
+    [ngClass]="{'is-invalid': submitted && f.name.errors}"
+    /> 
+    <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+      <div *ngIf="f.city.errors.required">City is required</div>
+      <div *ngIf="f.city.errors.pattern">Only letters</div>
+    </div>
 
+  </div>
+  <div class="form-group">
+    
+    <label>Postal Code</label>
+    <input type="text" placeholder="{{showPostalCode}}" #userPostalCode
+    formControlName="name"
+    class="form-control"  
+    [ngClass]="{'is-invalid': submitted && f.postalCode.errors}"
+    /> 
+    <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback">
+      <div *ngIf="f.postalCode.errors.required">Postal Code is required</div>
+      <div *ngIf="f.postalCode.errors.pattern">Only numbers</div>
+      <div *ngIf="f.postalCode.errors.minlength">6 digits only</div>
+      <div *ngIf="f.postalCode.errors.maxlength">6 digits only</div>
+    </div>
+
+  </div>
+
+  <div class="form-group">
+    
+    <label>Phone</label>
+    <input type="text" placeholder="{{showPostalCode}}" #userPhone
+    formControlName="name"
+    class="form-control"  
+    [ngClass]="{'is-invalid': submitted && f.phone.errors}"
+    /> 
+    <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+      <div *ngIf="f.phone.errors.required">Phone is required</div>
+      <div *ngIf="f.phone.errors.pattern">Number invalid</div>
+      <div *ngIf="f.phone.errors.minlength">Phone numbers needs 10 digits</div>
+      <div *ngIf="f.phone.errors.maxlength">Phone numbers needs 10 digits</div>
+    </div>
+
+  </div>
+
+  <div class="form-group">
+  <label>Delivery Address</label>
+  <input type="text" placeholder="{{showAddress}}" #userDeliveryAddress
+  formControlName="name"
+  class="form-control"  
+  [ngClass]="{'is-invalid': submitted && f.address.errors}"
+  /> 
+  <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+    <div *ngIf="f.address.errors">Address is required</div>
+  </div>
+
+</div>
+</div>
+<div class="float-child">
 
         <div class="form-group">
           <label>Username</label>
-          <input type="text"
+          <input type="text" placeholder="{{showUsername}}" #userUsername
           formControlName="username"
           class="form-control"
           [ngClass]="{'is-invalid': submitted && f.username.errors}"
-          #userUsername/>
+          #userName/>
           <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
             <div *ngIf="f.username.errors.minlength">
               Username must have at least 6 characters
@@ -44,7 +100,7 @@
 
         <div class="form-group">
           <label>Email</label>
-          <input type="text" #userEmail
+          <input type="text" placeholder="{{showEmail}}" #userEmail
           formControlName="email"
           class="form-control"
           [ngClass]="{'is-invalid': submitted && f.email.errors}"
@@ -62,6 +118,7 @@
 
         </div>
 
+        <div class="float-pass">
         <div class="form-group">
           <label>Password</label>
           
@@ -73,14 +130,17 @@
           class="form-control"
           [ngClass]="{'is-invalid': submitted && f.password.errors}"
           />
-
-          <button
+          </div>
+ 
+          <button 
+          class="mat-focus-indicator mat-icon-button mat-button-base"
           mat-icon-button matSuffix (click)="hide = !hide"
           [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
            <mat-icon>
              {{hide ? 'visibility_off' : 'visibility'}}
            </mat-icon>
            </button>
+           
 
           <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
             <div *ngIf="f.password.errors.required">
@@ -105,24 +165,23 @@
           formControlName="confirmPassword"
           class="form-control"
           [ngClass]="{'is-invalid': submitted && f.confirmPassword.errors}"
-          />
-          <button
+          >
+          <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+            <div *ngIf="f.confirmPassword.errors.required">
+            You must confirm your password
+            </div>
+
+          </div>
+          <button 
           mat-icon-button matSuffix (click)="hideSecond = !hideSecond"
           [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideSecond">
           <mat-icon>
             {{hideSecond? 'visibility_off' : 'visibility'}}
           </mat-icon>
         </button>
+         
 
-          <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
-            <div *ngIf="f.confirmPassword.errors.required">
-            You must confirm your password
-            </div>
-            <div *ngIf (userPass  userPassVerify)>
-
-            </div>
-
-          </div>
+         
 
         </div>
 
@@ -141,12 +200,15 @@
             Accept Terms is required
           </div>
         </div>
+        </div>
 
-        <div class="form-group">
+        <div class="form-group-buttons">
           <button type="submit" class="btn btn-primary"
            (click)="
-           add(userUsername.value,userName.value, userPass.value, userPassVerify.value, userEmail.value)">
-            Sign up
+           modify(userName.value, userCity.value, userPostalCode.value,
+           userDeliveryAddress.value, userUsername.value, userEmail.value,
+           userPass.value, userPassVerify.value, userPhone.value)">
+            Modify
           </button>
 
           <button
@@ -157,15 +219,6 @@
             Reset
           </button>
 
-
-          <button
-          type="button"
-          (click)="login()"
-          class="btn btn-warning float-right"
-        >
-          Log in
-        </button>
-
         </div>
 
 
@@ -174,75 +227,3 @@
 
 
     </div>
-
-  </mat-card>
-
-
-
-
-
-
-
-
-
-
-
-  <!-- Prima incercare de sign up
-
-<div class="example-container">
-
-  <mat-toolbar-row>
-    <mat-form-field appearance="fill" floatLabel="always">
-      <mat-label>Username</mat-label>
-      <input matInput type="text" class="example-right-align"
-       placeholder="Enter your username" input id="new-user" #userName />
-    </mat-form-field>
-  </mat-toolbar-row>
-
-  <mat-toolbar-row>
-    <mat-form-field appearance="fill" floatLabel='always'>
-        <mat-label>Password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'"
-          placeholder="Enter your password" input password="new-user" #userPass>
-        <button mat-icon-button matSuffix (click)="hide = !hide"
-         [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-        
-      </mat-form-field>
-    </mat-toolbar-row>
-
-  <mat-toolbar-row>
-      <mat-form-field appearance="fill" floatLabel='always'>
-        <mat-label>Verify Password</mat-label>
-        <input matInput [type]="hideSecond ? 'password' : 'text'"
-          placeholder="Re-nter your password" input password="new-user" #userPassVerify>
-        <button mat-icon-button matSuffix (click)="hideSecond = !hideSecond"
-         [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideSecond">
-          <mat-icon>{{hideSecond? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-        
-      </mat-form-field>
-    </mat-toolbar-row>
-    
-    
-
-    <mat-toolbar-row>
-      <button class="add-button" (click)="add(userName.value, userPass.value, userPassVerify.value);
-  userName.value=''" >
-   Sign up
- </button>
- </mat-toolbar-row>
-  </div>
-
-  <mat-toolbar-row color="primary">
-    <span> Do you have already an account? 
-      <nav>
-        <a routerLink="/login">Sign in</a>
-      </nav>
-    </span>
-  </mat-toolbar-row>
-
-
-
-  -->

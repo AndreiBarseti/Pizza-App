@@ -8,4 +8,6 @@ export interface Pizza {
     price: number;
     alergeni: string;
     ingredients: string;
+    quantity: number;
+    total: string;
 }

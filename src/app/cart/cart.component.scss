@@ -25,17 +25,19 @@ h4, h6 {
     transform: translate(-50%, -50%);
     text-align: center;
 }
-
+.cart-product{
+    background-color: transparent;
+}
 .card-table{
     position: relative;
     display: flex;
     flex-direction: column;
     min-width: none;
     word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: .25rem;
+    background-color: transparent;
+    //background-clip: border-box;
+    //border: 1px solid rgba(0, 0, 0, 0.2);
+   //border-radius: .25rem;
 }
 
 .center .btn {
@@ -46,4 +48,5 @@ h4, h6 {
     border-radius: 3px !important;
 
 }
+
 

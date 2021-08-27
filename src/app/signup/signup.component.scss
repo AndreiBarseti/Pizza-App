@@ -19,3 +19,44 @@
 .example-container {
   background-color: grey;
 }
+.card {
+  max-width: 410px;
+  max-height: 585px;
+  margin-left: 53.1%;
+  margin-top: 5.3%;
+ // margin-top: 5.8%;
+  
+}
+body .register-form{
+  margin-top: 15%;
+  
+}
+.btn-warning{
+  margin-left: 20px;
+}
+
+body {
+  background-image: 
+  url(https://media.gettyimages.com/vectors/signup-login-page-ui-design-background-vector-id1300294029?s=2048x2048);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/*
+@media screen and (max-width: 600px) {
+  .card {
+    max-width: 410px;
+    max-height: 585px;
+    margin-left: 53.1%;
+    //margin-top: 5.3%;
+    margin-top: 5.8%;
+    
+  }
+
+  body {
+    background-image: 
+    url(https://media.gettyimages.com/vectors/signup-login-page-ui-design-background-vector-id1300294029?s=2048x2048);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+} */
